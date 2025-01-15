@@ -16,6 +16,10 @@ cancer_data = load_breast_cancer()
 X_cancer = cancer_data.data
 y_cancer = cancer_data.target
 
+sonar_data = pd.read_csv("https://archive.ics.uci.edu/ml/machine-learning-databases/undocumented/connectionist-bench/sonar/sonar.all-data", header=None)
+X_sonar = sonar_data.iloc[:, :-1].values
+y_sonar = sonar_data.iloc[:, -1].map({'R': 0, 'M': 1}).values  # Convert to binary
+
 # Function to create and train the model
 def create_and_train_model(X, y, activation_function='relu'):
     # Split the dataset
@@ -53,3 +57,7 @@ print(f"Diabetes Dataset Accuracy: {diabetes_accuracy:.2f}")
 # Evaluate on Cancer Dataset
 cancer_accuracy = create_and_train_model(X_cancer, y_cancer)
 print(f"Cancer Dataset Accuracy: {cancer_accuracy:.2f}")
+
+# Evaluate on Sonar Dataset
+sonar_accuracy = create_and_train_model(X_sonar, y_sonar)
+print(f"Sonar Dataset Accuracy: {sonar_accuracy:.2f}")
